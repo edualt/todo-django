@@ -1,0 +1,59 @@
+
+{%extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div id="tareas">
+<div class="pb-5">
+    <h3 class="text-center pb-3 pt-3 h1">Hi, these are your tasks</h3>
+        <div>
+            <ul class="nav justify-content-end px-5">
+                <a class="btn btn-dark" href="{% url 'task-create' %}">Add Task</a>
+            </ul>
+        </div>
+</div>
+
+
+
+
+
+    <div class="container-md ps-5 pe-5 p">
+        <div class="row justify-content-start">
+            {%for task in tasks %}
+            <div class="col-sm ">
+                <div class="card card-border mb-5 shadow-lg" style="width: 18rem;"> 
+
+                    <a href="{% url 'task' task.id %}" class="card-brand">
+                        <img src="{% static 'images/homework.jpg' %}" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                            <h5 class="card-title">{{ task.title }}</h5>
+                            <p class="card-text">{{ task.description }}</p>
+                            <a href="{% url 'task' task.id %}">View</a></td>
+                            <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+                            <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
+                        
+                    </div>
+
+                </div>
+            </div>
+            {% empty %}
+                <h3>No items in list</h3>
+            {% endfor %}
+
+        </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}
