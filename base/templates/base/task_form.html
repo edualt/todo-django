@@ -1,13 +1,39 @@
 {%extends 'base/main.html' %}
 {% block content %}
 
-<h3>Task Form</h3>
-<a href="{% url 'tasks' %}">Go back</a>
-<form method="POST" action="">
-    {%csrf_token%}
-    {{form.as_p}}
-    <input type="submit" value="Submit">
+<div class="container-xxl w-auto">
+    <div class="" style="margin-top:10px">
+        <div class="rounded">
+            <div class="col-md-auto col-sm-auto p-3 bg-light form-group">
 
-</form>
+                <h3>Task Form</h3>
+                <a href="{% url 'tasks' %}">Go back</a>
 
-{% endblock content %}
+                <form method="POST" action="">
+                    {%csrf_token%}
+                    <div class="p-4">
+
+                            <label>{{ form.title.label }}</label>
+                            {{form.title}}
+                            <div class="form-group mb-3">
+                                <label>{{ form.description.label }}</label>
+                                {{form.description}}
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>{{ form.complete.label }}</label>
+                                {{form.complete}}
+                            </div>
+
+                                <button class="btn btn-dark" type="submit" value="Submit">Create</button>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} 

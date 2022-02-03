@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Task
+from .forms import PostTask
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -62,8 +63,8 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete' ]
-    success_url = reverse_lazy('tasks')
+    form_class = PostTask
+    #fields = ['title', 'description', 'complete' ]
 
     def form_valid(self, form):
         form.instance.user = self.request.user

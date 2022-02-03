@@ -1,6 +1,6 @@
 
-{% load static %}
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-
     <!--NAVBAR-->
     {% if request.user.is_authenticated %}
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
@@ -20,7 +19,6 @@
             <a class="navbar-brand" href="{% url 'tasks' %}">
                 <img src="{% static 'images/logo.png' %}" alt="">
             </a>
-
             <button class="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
@@ -28,10 +26,8 @@
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     {% if request.user.is_authenticated %}
@@ -45,30 +41,25 @@
                     <li class="nav-item"><a class="nav-link" href="#">Completados</a></li>
                 </ul>
             </div>
-
     
             <ul class="nav-item nav justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
                 <form method="GET" action="">
                     <input  type="text" name="search-area" value="{{ search_input }}">
                     <button type="submit" class="btn btn-outline-light" value="Search">Search</button>
+
                 </form>
             </ul>
-            
+
             
         </div>    
             
     </nav>
     {% endif %}
-
-
     <div class="container-fluid py-3 px-5">
         {% block content %}
-
         {% endblock content %}
     </div>
-
     <script src="{% static 'popper.min.js' %}"></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
-
 </body>
 </html>
