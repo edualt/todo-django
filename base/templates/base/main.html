@@ -36,9 +36,13 @@
                     {% else %}
                         <a href="{% url 'login' %}">Login</a>
                     {% endif %}
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'tasks' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'task-create' %}">Add Task</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Completados</a></li>
+
+
+                    <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'tasks' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.path == '/task-create/' %}active{% endif %}" href="{% url 'task-create' %}">Add Task</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.path == '/completed/' %}active{% endif %}" href="{% url 'completed-tasks' %}">Completados</a></li>
+                
+                
                 </ul>
             </div>
     

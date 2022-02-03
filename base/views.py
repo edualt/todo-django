@@ -53,6 +53,24 @@ class TaskList(LoginRequiredMixin,ListView):
         context['search_input'] = search_input
 
         return context
+
+class CompletedTask(LoginRequiredMixin,ListView):
+    model = Task
+    context_object_name = 'tasks'
+    template_name='base/completed_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user, complete=True)
+        context['countCompleted'] = context['tasks'].filter(complete=True).count()
+        
+        search_input = self.request.GET.get('search-area')
+        if search_input:
+            context['tasks'] = context['tasks'].filter(title__icontains=search_input, complete=True)
+        
+        context['search_input'] = search_input
+
+        return context
         
     
 class TaskDetail(LoginRequiredMixin, DetailView):

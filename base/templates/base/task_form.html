@@ -38,31 +38,5 @@
     </div>
 </div>
 
-                <form method="POST" action="">
-                    {%csrf_token%}
-                    <div class="p-4">
-
-                            <label>{{ form.title.label }}</label>
-                            {{form.title}}
-                            <div class="form-group mb-3">
-                                <label>{{ form.description.label }}</label>
-                                {{form.description}}
-                            </div>
-                            <div class="form-group mb-3">
-                                <label>{{ form.complete.label }}</label>
-                                {{form.complete}}
-                            </div>
-
-                                <button class="btn btn-dark" type="submit" value="Submit">Create</button>
-
-                    </div>
-
-
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock content %} 
