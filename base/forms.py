@@ -12,6 +12,7 @@ class PostTask(forms.ModelForm):
             'description' : forms.TextInput(attrs={ 'class' : 'form-control' }),
             'complete' : forms.CheckboxInput(),
         }
+        
 
 
 
