@@ -11,6 +11,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.urls import reverse_lazy
+import os
+from django.conf import settings
+from django.shortcuts import render
+from django.templatetags.static import static
 
 class CustomLoginView(LoginView):
     template_name = 'base/login.html'
@@ -83,6 +87,9 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     form_class = PostTask
     #fields = ['title', 'description', 'complete' ]
+    path = settings.MEDIA_ROOT
+    img_list = os.listdir(path + '/myimage')
+    context = {'image' : img_list}
     success_url = reverse_lazy('tasks')
 
     def form_valid(self, form):

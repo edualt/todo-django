@@ -2,6 +2,7 @@
 {%extends 'base/main.html' %}
 {% load static %}
 
+
 {% block content %}
 
 <div id="tareas">
@@ -26,9 +27,10 @@
                 <div class="card card-border mb-5 shadow-lg" style="width: 18rem;"> 
 
                     <a href="{% url 'task' task.id %}" class="card-brand">
-                        <img src="{% static 'images/homework.jpg' %}" class="card-img-top" alt="...">
+                    <img src="{% if task.image %} {{task.image.url}} {%else%} {% static 'images/homework.jpg' %} {%endif%} " class="card-img-top" style="height: 15rem;" alt="...">
                     </a>
                     <div class="card-body">
+                        
                             <h5 class="card-title">{{ task.title }}</h5>
                             <p class="card-text">{{ task.description|slice:":25" }}...</p>
                             <a href="{% url 'task' task.id %}">View</a></td>

@@ -11,7 +11,7 @@
                 <h3>Task Form</h3>
                 <a href="{% url 'tasks' %}">Go back</a>
 
-                <form method="POST" action="">
+                <form method="POST" enctype="multipart/form-data" action="">
                     {%csrf_token%}
                     <div class="p-4">
                 
@@ -19,14 +19,21 @@
                             {{form.title}}
                             <div class="form-group mb-3">
                                 <label>{{ form.description.label }}</label>
-                                
-                                <textarea name="description" class="form-control" id="id_description" rows="10"></textarea>
+                                {{form.description}}
                                 
                             </div>
                             <div class="form-group mb-3">
                                 <label>{{ form.complete.label }}</label>
                                 {{form.complete}}
                             </div>
+                            <div class="form-group mb-3">
+                                <label>{{ form.image.label }}</label>
+                                {{form.image }}
+                                
+                            </div>
+
+                            
+
 
                                 <button class="btn btn-dark" type="submit" value="Submit">Done</button>
                     

@@ -4,7 +4,7 @@ from .models import Task
 class PostTask(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ('title', 'description', 'complete', )
+        fields = ('title', 'description', 'image', 'complete' )
 
         widgets = {
 
@@ -13,6 +13,4 @@ class PostTask(forms.ModelForm):
             'complete' : forms.CheckboxInput(),
         }
         
-
-
 
