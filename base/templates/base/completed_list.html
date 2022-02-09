@@ -16,13 +16,13 @@
 
 
     <div class="container-md ps-5 pe-5 p">
-        <div class="row justify-content-start">
+        <div class="row">
             {%for task in tasks %}
-            <div class="col-sm ">
+            <div class="col-sm-auto">
                 <div class="card card-border mb-5 shadow-lg" style="width: 18rem;"> 
 
                     <a href="{% url 'task' task.id %}" class="card-brand">
-                        <img src="{% static 'images/homework.jpg' %}" class="card-img-top" alt="...">
+                        <img src="{% if task.image %} {{task.image.url}} {%else%} {% static 'images/homework.jpg' %} {%endif%} " class="card-img-top" style="height: 15rem;" alt="...">
                     </a>
                     <div class="card-body">
                             <h5 class="card-title">{{ task.title }}</h5>

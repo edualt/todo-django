@@ -7,33 +7,42 @@
                 <div class="rounded d-flex justify-content-center">
                     <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
                         <div class="text-center">
-                            <h3 class="text-dark">Sign In</h3>
+                            <h3 class="text-dark">Login</h3>
                         </div>
                         <form method="POST" action="">
                             {% csrf_token %}
-                            <div class="p-4">
-                                <div class="form-group mb-3">
-                                    <label>{{ form.username.label }}</label>
-                                    {{ form.username }}
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>{{ form.password.label }}</label>
-                                    {{ form.password }}
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input btn-outline-dark" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        Remember Me
-                                    </label>
-                                </div>
-                                <button class="btn btn-dark text-center mt-2" type="submit" value="Login">
-                                    Login
-                                </button>
+                            <table class="table">
+                                <tr>
+                                    <td><label for="id_username">Username</label></td>
+                                    <td><input id="id_username" name="username" 
+                                               type="text" class="form-control"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_password">Password</label></td>
+                                    <td><input id="id_password" name="password" 
+                                               type="password" class="form-control"></td>
+                                </tr>
+                            </table>
+                            {% if form.errors %}
+                                <p class="label label-danger">
+                                    Your username and password didn't match. 
+                                    Please try again.
+                                </p>
+                            {% endif %}
+            
+                            <input type="submit" value="Login" 
+                                   class="btn btn-dark pull-right" />
+                            <input type="hidden" name="next" value="{{ next }}" />
                                 <p class="text-center mt-5">Don't have an account?
                                     <a href="{% url 'register' %}">Register</a></p>
                                 </p>
                             </div>
                         </form>
+
+                       
+                        
+
+
                     </div>
                 </div>
             </div>

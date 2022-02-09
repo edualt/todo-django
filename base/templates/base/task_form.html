@@ -1,20 +1,42 @@
 {%extends 'base/main.html' %}
 {% block content %}
+{% load static %}
 
 
-
-<div class="container-xxl w-auto">
+<div class="container w-auto">
     <div class="" style="margin-top:10px">
         <div class="rounded">
             <div class="col-md-auto col-sm-auto p-3 bg-light form-group">
 
                 <h3>Task Form</h3>
-                <a href="{% url 'tasks' %}">Go back</a>
-
-                <form method="POST" enctype="multipart/form-data" action="">
-                    {%csrf_token%}
-                    <div class="p-4">
                 
+
+                    <form method="POST" enctype="multipart/form-data" action="">
+                        {%csrf_token%}
+
+                        <div class="form-group p-4">
+
+                            {% if task.image %}
+
+                                <img src="{{ task.image.url }}" style="width: 16rem;" class="img-thumbnail" alt="...">
+
+                            {% else %}
+
+                                <img src="{% static 'images/homework.jpg' %}" style="width: 16rem;" class="img-thumbnail" alt="...">
+
+                            {% endif %}
+
+                            <br>
+                            <br>
+
+                            <input class="form-control" type="file" name="image" accept="image/*" id="id_image"hidden/>
+                            <label for="id_image" class="form-control btn btn-secondary btn-sm">Choose task image </label>
+
+                        </div>
+
+                        <div class="p-4">
+            
+
                             <label>{{ form.title.label }}</label>
                             {{form.title}}
                             <div class="form-group mb-3">
@@ -26,16 +48,12 @@
                                 <label>{{ form.complete.label }}</label>
                                 {{form.complete}}
                             </div>
-                            <div class="form-group mb-3">
-                                <label>{{ form.image.label }}</label>
-                                {{form.image }}
-                                
-                            </div>
-
+                            
                             
 
 
                                 <button class="btn btn-dark" type="submit" value="Submit">Done</button>
+                                <a class="btn btn-dark" href="{% url 'tasks' %}">Go back</a>
                     
                     </div>
                    
