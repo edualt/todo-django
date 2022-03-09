@@ -8,9 +8,9 @@
         <div class="rounded">
             <div class="p-3 bg-light form-group">
                 
-                <h1>Task</h1>
+                <h1 style="font-family: 'Inter', sans-serif;">Task</h1>
                 <hr>
-                <h2>{{task.title}}</h2>
+                <h2 style="font-family: 'Inter', sans-serif;">{{task.title}}</h2>
                 
                 
 
@@ -28,7 +28,7 @@
 
                 <div class="pt-3">
 
-                <h4 >{{ task.description }}</h4>
+                <p style="font-size: 30px;">{{ task.description }}</p>
                 
                 </div>
 
@@ -48,11 +48,17 @@
                 <hr>
                 
                 <div class="container">
+                        <div class="float-start">
+                            <td><a class="btn btn-dark" href="{% url 'tasks' %}">Go back</a></td>
+                        </div>
                         <div class="form-group float-end">
                             <td><a class="btn btn-dark" href="{% url 'task-update' task.id %}">Edit</a></td>
                             <td><a class="btn btn-danger" href="{% url 'task-delete' task.id %}">Delete</a></td>
                         </div>
                 </div>
+
+                <br>
+                <br>
 
             </div>
         </div>

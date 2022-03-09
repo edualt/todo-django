@@ -15,19 +15,9 @@
 
                         <div class="form-group me-auto mb-2 mb-lg-0 p-4">
 
-                            {% if task.image %}
-
-                                <img src="{{ task.image.url }}" style="width: 16rem;" class="img-thumbnail col-6" alt="...">
-
-                            {% else %}
-
-                                <img src="{% static 'images/homework.jpg' %}" style="width: 16rem;" class="img-thumbnail" alt="...">
-
-                            {% endif %}
-
-                                
-                            <img id="preview" style="width: 16rem;" class="img-thumbnail col-6" alt="The image you select will replace the current image">
                             
+
+                                <img id="preview" style="width: 16rem;" class="img-thumbnail col-6" alt="The image you select will replace the current image" {% if task.image %} src="{{ task.image.url }}" {% else %} src="{% static 'images/homework.jpg' %}" {% endif %} >
 
                             <br>
                             <br>

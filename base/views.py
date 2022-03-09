@@ -1,5 +1,8 @@
 
 from multiprocessing import context
+from pyexpat import model
+from string import capwords
+from turtle import title
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -15,6 +18,7 @@ import os
 from django.conf import settings
 from django.shortcuts import render
 from django.templatetags.static import static
+from django.db.models.functions import Lower
 
 class CustomLoginView(LoginView):
     template_name = 'base/login.html'
@@ -57,6 +61,19 @@ class TaskList(LoginRequiredMixin,ListView):
         context['search_input'] = search_input
 
         return context
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering')
+        # validate ordering here
+        if ordering == 'title':
+            Task.objects.filter(title=title).order_by('title').query.__str__()
+            ordering = [Lower('title')]
+
+        if ordering == 'created':
+            Task.objects.filter(title=title).order_by('created').query.__str__()
+            
+        return ordering
+
 
 class CompletedTask(LoginRequiredMixin,ListView):
     model = Task
