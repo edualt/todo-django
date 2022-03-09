@@ -16,7 +16,7 @@
 <body>
     <!--NAVBAR-->
     {% if request.user.is_authenticated %}
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'tasks' %}">
                 <img src="{% static 'images/logo.png' %}" alt="">
@@ -30,10 +30,10 @@
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% if request.user.is_authenticated %}
-                        <span class="navbar-text">{{request.user}}</span>
+                        <span class="navbar-text"> <i> {{request.user}} </i></span>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                         <a href="{% url 'login' %}">Login</a>
@@ -43,22 +43,24 @@
                     <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'tasks' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {% if request.path == '/task-create/' %}active{% endif %}" href="{% url 'task-create' %}">Add Task</a></li>
                     <li class="nav-item"><a class="nav-link {% if request.path == '/completed/' %}active{% endif %}" href="{% url 'completed-tasks' %}">Completed</a></li>
-                
-                
+
+                    {% if '/task/' or '/task-update/' in request.path %}
+                        <li class="nav-item"><a class="nav-link active" href="">{{task.title}}</a></li>
+                    {% endif %}
                 </ul>
-            </div>
-    
-            <ul class="nav-item nav justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
-                <form method="GET" action="">
-                    <input  type="text" name="search-area" value="{{ search_input }}">
+
+                
+
+                <form class="d-flex" method="GET" >
+                    <input class="form-control me-2" type="text" name="search-area" placeholder="Search Tasks" value="{{ search_input|default_if_none:'' }}">
                     <button type="submit" class="btn btn-outline-light" value="Search">Search</button>
                     
                 </form>
-            </ul>
-
+                
+                
             
+            </div>    
         </div>    
-            
     </nav>
     {% endif %}
     <div class="container-fluid py-3 px-5">
@@ -71,7 +73,7 @@
     
     <script src="{% static 'popper.min.js' %}"></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
-    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'preview.js' %}"></script>
 
 </body>
 </html>

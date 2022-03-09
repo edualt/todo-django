@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
 .card-border{
     overflow: hidden;
     transition: all ease-out 0.2s;
@@ -7,4 +9,11 @@
     transform: scale(1.05);
 }
 
-
+.title{
+    display: block;
+    font-size: 32px;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+}

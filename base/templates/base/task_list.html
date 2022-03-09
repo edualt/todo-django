@@ -6,8 +6,8 @@
 {% block content %}
 
 <div id="tareas">
-<div class="pb-5">
-    <h3 class="text-center  pt-3 h1">Hi, these are your tasks</h3>
+<div style="font-weight:700; font-family: 'Inter', sans-serif;" class="pb-5">
+    <p class="text-center h1">Hi, these are your tasks</p>
     <h4 class="text-center pb-3 pt-3">You have {{ count }} incomplete tasks</h4>
         <div>
             <ul class="nav justify-content-end px-5">
@@ -15,10 +15,6 @@
             </ul>
         </div>
 </div>
-
-
-
-
 
     <div class="container-md ps-5 pe-5 p">
         <div class="row ">
@@ -31,18 +27,18 @@
                     </a>
                     <div class="card-body">
                         
-                            <h5 class="card-title">{{ task.title }}</h5>
-                            <p class="card-text">{{ task.description|slice:":25" }}...</p>
-                            <a class="btn btn-outline-dark" href="{% url 'task' task.id %}">View</a></td>
-                            <td><a class="btn btn-outline-dark" href="{% url 'task-update' task.id %}">Edit</a></td>
-                            <td><a class="btn btn-outline-danger" href="{% url 'task-delete' task.id %}">Delete</a></td>
+                            <h5 class="card-title" style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">{{ task.title|slice:":18" }}...</h5>
+                            <p class="card-text" style="">{{ task.description|slice:":25" }}...</p>
+                            <a class="btn btn-dark" href="{% url 'task' task.id %}">View</a></td>
+                            <td><a class="btn btn-dark" href="{% url 'task-update' task.id %}">Edit</a></td>
+                            <td><a class="btn btn-danger" href="{% url 'task-delete' task.id %}">Delete</a></td>
                         
                     </div>
 
                 </div>
             </div>
             {% empty %}
-                <h3>No items in list</h3>
+                <h3 style="font-family: 'Inter', sans-serif;">No items in list</h3>
             {% endfor %}
 
         </div>

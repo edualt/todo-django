@@ -3,22 +3,21 @@
 {% load static %}
 
 
-<div class="container w-auto">
+<div class="container w-auto" >
     <div class="" style="margin-top:10px">
         <div class="rounded">
             <div class="col-md-auto col-sm-auto p-3 bg-light form-group">
 
-                <h3>Task Form</h3>
-                
+                <h3 style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">Task Form</h3>
 
                     <form method="POST" enctype="multipart/form-data" action="">
                         {%csrf_token%}
 
-                        <div class="form-group p-4">
+                        <div class="form-group me-auto mb-2 mb-lg-0 p-4">
 
                             {% if task.image %}
 
-                                <img src="{{ task.image.url }}" style="width: 16rem;" class="img-thumbnail" alt="...">
+                                <img src="{{ task.image.url }}" style="width: 16rem;" class="img-thumbnail col-6" alt="...">
 
                             {% else %}
 
@@ -26,36 +25,39 @@
 
                             {% endif %}
 
+                                
+                            <img id="preview" style="width: 16rem;" class="img-thumbnail col-6" alt="The image you select will replace the current image">
+                            
+
                             <br>
                             <br>
 
-                            <input class="form-control" type="file" name="image" accept="image/*" id="id_image"hidden/>
-                            <label for="id_image" class="form-control btn btn-secondary btn-sm">Choose task image </label>
+                            <input class="form-control" type="file" name="image" onchange="showPreview(event);" accept="image/*" id="id_image"hidden/>
+                            <label for="id_image" class="form-control btn btn-secondary btn-sm">Change task image </label>
 
                         </div>
 
                         <div class="p-4">
             
 
-                            <label>{{ form.title.label }}</label>
+                            <label style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">{{ form.title.label }}</label>
                             {{form.title}}
                             <div class="form-group mb-3">
-                                <label>{{ form.description.label }}</label>
+                                <label style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">{{ form.description.label }}</label>
                                 {{form.description}}
                                 
                             </div>
-                            <div class="form-group mb-3">
+                            <div style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;" class="form-group mb-3">
                                 <label>{{ form.complete.label }}</label>
                                 {{form.complete}}
                             </div>
                             
+                            <div style="font-weight:700; font-family: 'Inter', sans-serif; width:100%;">
+                            <button class="btn btn-dark" type="submit" value="Submit">Done</button>
+                            <a class="btn btn-dark" href="{% url 'tasks' %}">Go back</a>
+                            </div>
                             
-
-
-                                <button class="btn btn-dark" type="submit" value="Submit">Done</button>
-                                <a class="btn btn-dark" href="{% url 'tasks' %}">Go back</a>
-                    
-                    </div>
+                        </div>
                    
 
                 </form>
