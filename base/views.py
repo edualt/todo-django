@@ -1,24 +1,22 @@
 
-from multiprocessing import context
-from pyexpat import model
-from string import capwords
 from turtle import title
+from urllib import request
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Task
-from .forms import PostTask
+from .forms import PostTask, CreateUserForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib import messages
 from django.urls import reverse_lazy
 import os
 from django.conf import settings
-from django.shortcuts import render
-from django.templatetags.static import static
 from django.db.models.functions import Lower
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 class CustomLoginView(LoginView):
     template_name = 'base/login.html'
@@ -30,7 +28,7 @@ class CustomLoginView(LoginView):
 
 class RegisterPage(FormView):
     template_name = 'base/register.html'
-    form_class = UserCreationForm
+    form_class = CreateUserForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tasks')
 
@@ -38,6 +36,19 @@ class RegisterPage(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
+
+        subject='PRUEBA DE CORREO render html custom!'
+        message='Hey ' +user.username+ ' you are now successfully register with us!'
+        to=user.email
+
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [to],
+            html_message=render_to_string('base/prueba.html', {'context':'values'})
+        )
+
         return super(RegisterPage, self).form_valid(form)
     
     def get(self, *args, **kwargs):
@@ -92,7 +103,25 @@ class CompletedTask(LoginRequiredMixin,ListView):
         context['search_input'] = search_input
 
         return context
+
+class IncompletedTask(LoginRequiredMixin,ListView):
+    model = Task
+    context_object_name = 'tasks'
+    template_name='base/incompleted_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user, complete=False)
+        context['countCompleted'] = context['tasks'].filter(complete=False).count()
         
+        search_input = self.request.GET.get('search-area')
+        if search_input:
+            context['tasks'] = context['tasks'].filter(title__icontains=search_input, complete=False)
+        
+        context['search_input'] = search_input
+
+        return context
+    
     
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
