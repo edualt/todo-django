@@ -7,13 +7,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODO</title>
+    
+
+    {% if request.path == '/login/' %}
+        <title>Welcome to TODOapp</title>
+    {% endif %}
+
+    {% if request.path == '/register/' %}
+        <title>Welcome to TODOapp</title>
+    {% endif %}
+
+    {% if request.path == '/' %}
+        <title>TODO - Tasks</title>
+    {% endif %}
+
+    {% if request.path == '/task-create/' %}
+        <title>TODO - Create task</title>
+    {% endif %}
+    
+    {% if request.path == '/completed/' %}
+        <title>TODO - Completed tasks</title>
+    {% endif %}
+
+    {% if request.path == '/incompleted/' %}
+        <title>TODO - Incompleted tasks</title>
+    {% endif %}
+
+    {% if '/task/' or '/task-update/' in request.path %}
+        <title>TODO - {{ task.title }}</title>
+    {% endif %}
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <link rel="stylesheet" href='{% static "bootstrap.min.css" %}'>
     
     
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!--NAVBAR-->
     {% if request.user.is_authenticated %}
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -64,14 +94,16 @@
         </div>    
     </nav>
     {% endif %}
-    <div class="container-fluid py-3 px-5">
+    <div style="height: 100%;" class="container-fluid py-3 px-5 clear-top">
         {% block content %}
 
         
         {% endblock content %}
     </div>
 
-    
+
+
+
     <script src="{% static 'popper.min.js' %}"></script>
     <script src="{% static 'bootstrap.min.js' %}"></script>
     <script src="{% static 'preview.js' %}"></script>

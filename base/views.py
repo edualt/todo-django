@@ -1,6 +1,8 @@
 
+from itertools import count
 from turtle import title
 from urllib import request
+from venv import create
 from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -10,7 +12,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
-from django.contrib import messages
 from django.urls import reverse_lazy
 import os
 from django.conf import settings
@@ -37,14 +38,16 @@ class RegisterPage(FormView):
         if user is not None:
             login(self.request, user)
 
-        subject='PRUEBA DE CORREO render html custom!'
-        message='Hey ' +user.username+ ' you are now successfully register with us!'
+        username = user.username
+
+        subject='Register Confirmed! Welcome ' + username + '!'
+        message='Hey ' +username+ ' you are now successfully register with us!'
         to=user.email
 
         send_mail(
             subject,
             message,
-            settings.EMAIL_HOST_USER,
+            'TODOapp',
             [to],
             html_message=render_to_string('base/prueba.html', {'context':'values'})
         )
@@ -64,7 +67,8 @@ class TaskList(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
         context['count'] = context['tasks'].filter(complete=False).count()
-        
+        context['counttasks'] = context['tasks'].filter(user=self.request.user).count()
+
         search_input = self.request.GET.get('search-area')
         if search_input:
             context['tasks'] = context['tasks'].filter(title__icontains=search_input)
@@ -137,6 +141,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     img_list = os.listdir(path + '/myimage')
     context = {'image' : img_list}
     success_url = reverse_lazy('tasks')
+    
 
     def form_valid(self, form):
         form.instance.user = self.request.user
