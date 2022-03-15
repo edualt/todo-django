@@ -72,7 +72,7 @@
 
                     <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'tasks' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {% if request.path == '/task-create/' %}active{% endif %}" href="{% url 'task-create' %}">Add Task</a></li>
-                    <li class="nav-item"><a class="nav-link {% if request.path == '/completed/' %}active{% endif %}" href="{% url 'completed-tasks' %}">Completedd</a></li>
+                    <li class="nav-item"><a class="nav-link {% if request.path == '/completed/' %}active{% endif %}" href="{% url 'completed-tasks' %}">Completed</a></li>
                     <li class="nav-item"><a class="nav-link {% if request.path == '/incompleted/' %}active{% endif %}" href="{% url 'incompleted-tasks' %}">Incompleted</a></li>
 
                     {% if '/task/' or '/task-update/' in request.path %}
