@@ -26,6 +26,6 @@ class UserAdmin(AuthUserAdmin):
 
 
 admin.site.register(Task)
-
+admin.site.register(User, UserAdmin)
 
 
