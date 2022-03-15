@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
 
-
+@media screen and (max-width: 960px){
+    body{
+        background: #000;
+    }
+}
 
 html{
     height: 100%;
