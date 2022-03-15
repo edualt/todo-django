@@ -15,5 +15,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo.settings')
 
 application = get_wsgi_application()
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "todo.settings")
+
 from whitenoise.django import DjangoWhiteNoise  
 application = DjangoWhiteNoise(application)
