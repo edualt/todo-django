@@ -1,6 +1,7 @@
 
+from asyncio import tasks
 from itertools import count
-from turtle import title
+
 from urllib import request
 from venv import create
 from django.shortcuts import redirect
@@ -81,11 +82,11 @@ class TaskList(LoginRequiredMixin,ListView):
         ordering = self.request.GET.get('ordering')
         # validate ordering here
         if ordering == 'title':
-            Task.objects.filter(title=title).order_by('title').query.__str__()
+            Task.objects.filter().order_by('title').query.__str__()
             ordering = [Lower('title')]
 
         if ordering == 'created':
-            Task.objects.filter(title=title).order_by('created').query.__str__()
+            Task.objects.filter().order_by('created').query.__str__()
             
         return ordering
 
