@@ -14,7 +14,8 @@ from pathlib import Path
 import environ
 import os
 
-
+import cloudinary
+import cloudinary_storage
 
 env = environ.Env()
 environ.Env.read_env()
@@ -45,6 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+
+    'cloudinary',
+    'cloudinary_storage',
+
     'base.apps.BaseConfig',
 ]
 
@@ -138,6 +143,14 @@ STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': env('CLOUD_NAME'),
+    'API_KEY': env('API_KEY'),
+    'API_SECRET': env('API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
